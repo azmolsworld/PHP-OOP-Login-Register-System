@@ -3,16 +3,16 @@
 
 class Config {
 	
-	fuplic static function get($path = null){
+	public static function get($path = null){
 	
 		if ($path){
 				
 				$config = $GLOBALS['config'];
-				$path = ecplode('/', $path);
+				$path = explode('/', $path);
 
 				foreach ($path as $bit) {
 					if (isset($config[$bit])){
-						$config = $Config[$bit];
+						$config = $config[$bit];
 					}
 				}
 
