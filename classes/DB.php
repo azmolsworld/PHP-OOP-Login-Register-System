@@ -15,7 +15,7 @@ class DB{
 		
 		try {
 			$this->_pdo = new PDO('mysql:host=' . Config::get('mysql/host') . ';dbname=' . Config::get('mysql/db'), Config::get('mysql/username'), Config::get('mysql/password'));
-			echo 'azmol';
+			echo 'Azmol';
 		} catch (PDOException $e) {
 			die($e->getMessage());
 		}
@@ -26,5 +26,21 @@ class DB{
 			self::$_instance = new DB();
 		}
 		return self::$_instance;
+	}
+
+	public function query ($sql, $params = array()){
+		$this->_error = false;
+		if ($this->_query = $this->_pdo->prepare($sql)) {
+			$x = 1;
+			if (count($params)) {
+				foreach ($params as $param) {
+					$this->_query->bindValue($x, $param);
+					$x++;
+				}
+			}
+			if ($this->_query->execute()) {
+				echo "Hossain";
+			}
+		}
 	}
 }
