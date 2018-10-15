@@ -7,7 +7,5 @@ $use = DB::getInstance()->query("SELECT * FROM users");
 if(!$use->count()) {
 	echo "No User";
 }else {
-	foreach ($use->results() as $user) {
-		echo $user->username, "<br>";
-	}
+	echo $use->first()->username;
 }
