@@ -49,8 +49,8 @@ class DB{
 
 	public function action ($action, $table, $where = array()){
 		if (count($where) === 3) {
-			$operators = array('=', '>', '<', '>=', '<=');
 
+			$operators 	= array('=', '>', '<', '>=', '<=');
 			$field 		= $where[0];
 			$operator	= $where[1];
 			$value 		= $where[2];
@@ -72,6 +72,10 @@ class DB{
 
 	public function delete($table, $where){
 		return $this->action('DELETE', $table, $where);
+	}
+
+	public function results(){
+		return $this->_results;
 	}
 
 	public function error(){

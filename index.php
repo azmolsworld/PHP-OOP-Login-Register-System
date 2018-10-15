@@ -1,11 +1,13 @@
 <?php 
 require_once 'core/init.php';
 
-$use = DB::getInstance()->get('users', array('username', '=', 'limon'));
+$use = DB::getInstance()->query("SELECT * FROM users");
 
 
 if(!$use->count()) {
 	echo "No User";
 }else {
-	echo "Ok!";
+	foreach ($use->results() as $user) {
+		echo $user->username, "<br>";
+	}
 }
