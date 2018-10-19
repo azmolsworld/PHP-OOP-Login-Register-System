@@ -24,6 +24,11 @@ if (Input::exists()) {
 		<input type="password" name="username_again" id="username_again" >
 	</div>
 
+	<div class="field">
+		<label for="name">Name</label>
+		<input type="text" name="name" id="name" autocomplete="off">
+	</div>
+
 	<input type="submit" name="" value="Register">
 	
 </form>
