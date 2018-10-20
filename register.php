@@ -2,34 +2,37 @@
 require_once 'core/init.php';
 
 if (Input::exists()) {
-	$validate = new Validate();
-	$validation = $validate->check($_POST, array(
-		'username' => array(
-			'required' => true,
-			'min' => 5,
-			'max' => 20,
-			'unique' => 'users'
-		),
-		'password' => array(
-			'required' => true,
-			'min' => 8
-		),
-		'password_again' => array(
-			'required' => true,
-			'matches' => 'password'
-		),
-		'name' => array(
-			'required' => true,
-			'min' => 3,
-			'max' => 50
-		)
-	));
-	
-	if ($validation->passed()) {
-		echo "Passed";
-	}else {
-		foreach ($validation->errors() as $error) {
-			echo $error, '<br>';
+	if(Token::check(Input::get('token'))){
+		echo "azmol run";
+		$validate = new Validate();
+		$validation = $validate->check($_POST, array(
+			'username' => array(
+				'required' => true,
+				'min' => 5,
+				'max' => 20,
+				'unique' => 'users'
+			),
+			'password' => array(
+				'required' => true,
+				'min' => 8
+			),
+			'password_again' => array(
+				'required' => true,
+				'matches' => 'password'
+			),
+			'name' => array(
+				'required' => true,
+				'min' => 3,
+				'max' => 50
+			)
+		));
+		
+		if ($validation->passed()) {
+			echo "Passed";
+		}else {
+			foreach ($validation->errors() as $error) {
+				echo $error, '<br>';
+			}
 		}
 	}
 }
@@ -40,7 +43,7 @@ if (Input::exists()) {
 <form action="" method="post">
 	<div class="field">
 		<label for="username">Username</label>
-		<input type="text" name="username" id="username" value="" autocomplete="off">
+		<input type="text" name="username" id="username" value="<?php echo escape(Input::get('username')); ?>" autocomplete="off">
 	</div>
 
 	<div class="field">
@@ -55,9 +58,10 @@ if (Input::exists()) {
 
 	<div class="field">
 		<label for="name">Name</label>
-		<input type="text" name="name" id="name" value="" autocomplete="off">
+		<input type="text" name="name" id="name" value="<?php echo escape(Input::get('name')); ?>" autocomplete="off">
 	</div>
 
+	<input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
 	<input type="submit" name="" value="Register">
 	
 </form>
