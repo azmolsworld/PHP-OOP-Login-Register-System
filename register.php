@@ -2,7 +2,33 @@
 require_once 'core/init.php';
 
 if (Input::exists()) {
-	echo Input::get('username');
+	$validate = new validate();
+	$validation = $validate->check($_POST, array(
+		'username' => array(
+			'required' => true,
+			'min' => 5,
+			'max' => 20,
+			'unique' => 'users'
+		),
+		'password' => array(
+			'required' => true,
+			'min' => 8
+		),
+		'password_again' => array(
+			'required' => true,
+			'matches' => 'password'
+		),
+		'name' => array(
+			'required' => true;
+			'min' => 3,
+			'max' => 50
+		)
+	));
+	if ($validation->passed) {
+		//register
+	}else {
+		// not
+	}
 }
 
 ?>
