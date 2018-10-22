@@ -44,7 +44,7 @@ if (Input::exists()) {
 				));
 
 				Session::flash('home', 'You have been registered!');
-				header('Location: index.php');
+				Redirect::to('index.php');
 
 			} catch (Exception $e) {
 				die($e->getMessage());
