@@ -69,6 +69,24 @@ class User {
 		return false;
 	}
 
+	public function hasPermission($key){
+		$group = $this->_db->get('groups', array('id', '=', $this->data()->groups));
+		//print_r($group->first());
+
+		if ($group->count()) {
+			$permissions = json_decode($group->first()->permissions, true);
+
+			if ($permissions[$key] === true) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public function exists(){
+		return (!empty($this->_db)) ? true : false ;
+	}
+	
 	public function logout(){
 		Session::delete($this->_sessionName);
 	}

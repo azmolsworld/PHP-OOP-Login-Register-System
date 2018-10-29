@@ -15,6 +15,10 @@ if ($user->isLoggedIn()) {
 		<li><a href="changepassword.php">Change Password</a></li>
 	</ul>
 <?php
+	if(!$user->hasPermission('admin')) {
+		echo 'Your are an administrator!';
+	}
+
 } else {
 	echo '<p>You need to <a href="login.php"> log in</a> or <a href="register.php"> register<a></p>';
 }
